@@ -1,0 +1,38 @@
+---
+title: "User Document - Loan Repayment Estimator "
+author: "Raju Muthu"
+date: "July 31, 2016"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Overview
+
+The monthly loan repayment amount depends on the amount borrowed, duration of the loan (term) and the annual rate of interest.  "Loan Repayment Estimator" application provides the user to specify loan amount in dollars, term of loan or duration of loan in months, and rate of interest as percentage.  
+
+The computations performed in this estimator application assumes full amortization by month, and the formula used for finding out the principal balance at the end of the months is as follows:
+   principal balance at the $i^th$ month of payment $b_i=((1 + r) ^ i) * P - (((1 + r) ^ i) - 1) * monthlyPayment/(r)$ ,
+   where r is obtained by dividing the specified percent annual rate by (12  * 100): that is converting from year to month and fraction,  $P$ is the borrowed amount, $monthlyPayment$ is the constant amount which is repayable every month until the end of loan term.
+   
+   Monthly repayment amount is calculated by $ r  * P /(1 - (1 +r)^ -N)$, where r and P are same as above and N is the Term of the loan in months.
+   
+   These are three key points of fixed-rate loans: a) the fixed monthly payment depends upon the amount borrowed, the interest rate, and the length of time over which the loan is repaid; b) the amount owed every month equals the amount owed from the previous month plus interest on that amount, minus the fixed monthly payment; c)  the fixed monthly payment is chosen so that the loan is paid off in full with interest at the end of its term and no more money is owed.
+   
+    For the derivation of above formula and further insight into mathematics behind fixed rate of interest repayment computation please refer to (1)
+  
+## Inputs
+
+The application provides three numeric inputs for Loan Amount, Loan Term and rate, and a date input for the start date of the loan.  As these inputs are varied, the reactive components on the server receives the input values and computes monthly payment and amortization schedule for the loan repayment.
+
+
+## Outputs
+The application provides an interactive response with the monthly payments and interest paid for the duration of the loan which gets displayed on the summary tab panel of the output.  On the same panel a 'pie' chart is displayed which gives a relative indication of what percentage of payment has gone towards the principal payment and interest payments at the end of loan term.  The amortization payment schedule is displayed on the 'payment schedule' tab panel.  The schedule provides the detail break up of interest and principal at any month of repayment.  It can be noticed that more goes towards interest payments at the beginning of the loan and gradually reduces to become zero for the last month of payment.  At the same time Principal payment is less in the beginning but becomes greater as the repayment months increase.
+
+The third tab panel hosts the Application usage document which is the document that is currently read.
+
+
+## Reference
+1) "https://en.wikipedia.org/wiki/Mortgage_calculator#Monthly_payment_formula"
